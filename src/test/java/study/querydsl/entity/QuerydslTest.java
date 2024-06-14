@@ -1,4 +1,4 @@
-package entity;
+package study.querydsl.entity;
 
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import jakarta.persistence.EntityManager;
@@ -7,13 +7,11 @@ import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.annotation.Commit;
 import org.springframework.transaction.annotation.Transactional;
 import study.querydsl.QuerydslApplication;
 
-@SpringBootTest(classes = QuerydslApplication.class)
+@SpringBootTest
 @Transactional
-@EntityScan(basePackages = "entity")
 //@Commit
 class QuerydslTest {
 

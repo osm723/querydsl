@@ -1,19 +1,19 @@
-package entity;
+package study.querydsl.entity;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.annotation.Commit;
 import org.springframework.transaction.annotation.Transactional;
 import study.querydsl.QuerydslApplication;
+import study.querydsl.entity.Member;
+import study.querydsl.entity.Team;
 
 import java.util.List;
 
-@SpringBootTest(classes = QuerydslApplication.class)
+@SpringBootTest
 @Transactional
-@EntityScan(basePackages = "entity")
 class MemberTest {
 
     @PersistenceContext

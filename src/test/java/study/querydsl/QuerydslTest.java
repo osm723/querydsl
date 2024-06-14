@@ -1,18 +1,17 @@
+package study.querydsl;
+
 import com.querydsl.jpa.impl.JPAQueryFactory;
-import entity.Hello;
-import entity.QHello;
+import study.querydsl.entity.Hello;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
-import study.querydsl.QuerydslApplication;
+import study.querydsl.entity.QHello;
 
-@SpringBootTest(classes = QuerydslApplication.class)
+@SpringBootTest
 @Transactional
-@EntityScan(basePackages = "entity")
 //@Commit
 class QuerydslTest {
 
