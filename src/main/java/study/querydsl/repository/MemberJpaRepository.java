@@ -1,6 +1,10 @@
 package study.querydsl.repository;
 
 import com.querydsl.core.BooleanBuilder;
+import com.querydsl.core.types.Predicate;
+import com.querydsl.core.types.dsl.BooleanExpression;
+import com.querydsl.core.types.dsl.NumberPath;
+import com.querydsl.core.types.dsl.StringPath;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import org.springframework.util.StringUtils;
 import study.querydsl.dto.MemberDto;
@@ -81,6 +85,34 @@ public class MemberJpaRepository {
                 .leftJoin(member.team, team)
                 .where(builder)
                 .fetch();
+    }
+
+    public List<MemberTeamDto> searchByWhere(MemberSearchCond memberSearchCond) {
+        return queryFactory
+                .select(new QMemberTeamDto(member.id.as("memberId"), member.username, member.age, team.id.as("teamId"), team.name.as("teamname")))
+                .from(member)
+                .leftJoin(member.team, team)
+                .where(usernameEq(memberSearchCond.getUsername()),
+                        teamnameEq(memberSearchCond.getTeamname()),
+                        ageLoe(memberSearchCond.getAgeLoe()),
+                        ageGoe(memberSearchCond.getAgeGoe()))
+                .fetch();
+    }
+
+    private BooleanExpression ageGoe(Integer age) {
+        return age != null ? member.age.goe(age) : null;
+    }
+
+    private BooleanExpression ageLoe(Integer age) {
+        return age != null ? member.age.loe(age) : null;
+    }
+
+    private BooleanExpression teamnameEq(String teamname) {
+        return StringUtils.hasText(teamname) ? team.name.eq(teamname) : null;
+    }
+
+    private BooleanExpression usernameEq(String username) {
+        return StringUtils.hasText(username) ? member.username.eq(username) : null;
     }
 
 }
